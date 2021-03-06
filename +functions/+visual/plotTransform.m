@@ -8,10 +8,10 @@ newFrame = oldFrame;
 newFrame = transformMatrix*newFrame;
 
 % Generate old frame translation
-oldFrameOrigin = customFunc.transform.positionFromTransform(oldFrame);
+oldFrameOrigin = functions.transform.positionFromTransform(oldFrame);
 
 % Generate new frame properties
-newFrameOrigin = customFunc.transform.positionFromTransform(newFrame);
+newFrameOrigin = functions.transform.positionFromTransform(newFrame);
 
 % Generate sizing properties
 axesSize(1) = newFrameOrigin(1)+5;
@@ -22,14 +22,14 @@ frameSize = 0.2*axesSize;
 % frameSize = 1;
 
 % Generate old frame rotations
-oldFrameX = customFunc.transform.rotationFromTransform(oldFrame)*[frameSize 0 0]'+oldFrameOrigin;
-oldFrameY = customFunc.transform.rotationFromTransform(oldFrame)*[0 frameSize 0]'+oldFrameOrigin;
-oldFrameZ = customFunc.transform.rotationFromTransform(oldFrame)*[0 0 frameSize]'+oldFrameOrigin;
+oldFrameX = functions.transform.rotationFromTransform(oldFrame)*[frameSize 0 0]'+oldFrameOrigin;
+oldFrameY = functions.transform.rotationFromTransform(oldFrame)*[0 frameSize 0]'+oldFrameOrigin;
+oldFrameZ = functions.transform.rotationFromTransform(oldFrame)*[0 0 frameSize]'+oldFrameOrigin;
 
 % Generate new frame rotations
-newFrameX = customFunc.transform.rotationFromTransform(newFrame)*[frameSize 0 0]'+newFrameOrigin;
-newFrameY = customFunc.transform.rotationFromTransform(newFrame)*[0 frameSize 0]'+newFrameOrigin;
-newFrameZ = customFunc.transform.rotationFromTransform(newFrame)*[0 0 frameSize]'+newFrameOrigin;
+newFrameX = functions.transform.rotationFromTransform(newFrame)*[frameSize 0 0]'+newFrameOrigin;
+newFrameY = functions.transform.rotationFromTransform(newFrame)*[0 frameSize 0]'+newFrameOrigin;
+newFrameZ = functions.transform.rotationFromTransform(newFrame)*[0 0 frameSize]'+newFrameOrigin;
 
 % Setup plot
 figure1 = figure(1);

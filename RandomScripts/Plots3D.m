@@ -5,14 +5,14 @@ xyz = [1,0,0]';
 xyz2 = [1,0,0]';
 
 % Euler
-xyz = customFunc.rotate.rotate_Zd(90)*xyz;
-xyz = customFunc.rotate.rotate_Xd(45)*xyz;
-% xyz = (customFunc.rotate.rotate_Zd(90)*xyz)*customFunc.rotate.rotate_Xd(45);
+xyz = functions.rotate.rotate_Zd(90)*xyz;
+xyz = functions.rotate.rotate_Xd(45)*xyz;
+% xyz = (functions.rotate.rotate_Zd(90)*xyz)*functions.rotate.rotate_Xd(45);
 
 % % Fixed Angle
-% xyz = customFunc.rotate.rotate_Xd(45)*customFunc.rotate.rotate_Zd(90);
-% % customFunc.rotate.rotate2 = customFunc.rotate.rotate_Zd(90)*customFunc.rotate.rotate_Xd(45);
-% xyz2 = customFunc.rotate.rotate2*xyz2;
+% xyz = functions.rotate.rotate_Xd(45)*functions.rotate.rotate_Zd(90);
+% % functions.rotate.rotate2 = functions.rotate.rotate_Zd(90)*functions.rotate.rotate_Xd(45);
+% xyz2 = functions.rotate.rotate2*xyz2;
 
 x = [0,xyz(1)]; 
 y = [0,xyz(2)]; 

@@ -3,7 +3,7 @@ clear;clc;clf;
 oldFrame = eye(4);
 newFrame = oldFrame;
 
-newFrame = functions.links.Link2Transformd(0,400,150,90)*newFrame;
+newFrame = functions.links.Link2Transformd([0,400,150,90])*newFrame;
 
 % Generate old frame translation
 oldFrameOrigin = functions.transform.positionFromTransform(oldFrame);

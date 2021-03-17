@@ -1,7 +1,6 @@
 function plotTransform(transformMatrix)
 %PLOT3D This function looks to take a transform and move a frame, plotting
 %the original position and the final position
-clf;
 oldFrame = eye(4);
 newFrame = oldFrame;
 

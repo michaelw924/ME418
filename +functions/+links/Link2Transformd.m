@@ -19,11 +19,11 @@ function [outputMatrix] = Link2Transformd(linkMatrix)
             sind(theta_i)*sind(alpha_i_minus_1),cosd(theta_i)*sind(alpha_i_minus_1),cosd(alpha_i_minus_1),d_i*cosd(alpha_i_minus_1);...
             0, 0, 0, 1];
         if i > 1
-            outputMatrix = tempMatrix*transformMatrix;
+            tempMatrix = tempMatrix*transformMatrix;
         else
-            outputMatrix = transformMatrix;
+            tempMatrix = transformMatrix;
         end
     end
-
+    outputMatrix = tempMatrix;
 end
 

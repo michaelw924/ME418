@@ -15,9 +15,7 @@ RotationAboutZ = functions.rotate.rotate_Z(theta);
 
 % Generate fixed angle rotation matrix by multiplying opposite order of
 % application:
-RotationBA = RotationAboutX*RotationAboutZ;
-
-RotationTest = RotationAboutZ*RotationAboutX;
+RotationBA = RotationAboutZ*RotationAboutX;
 
 % Display Result
 display(RotationBA);

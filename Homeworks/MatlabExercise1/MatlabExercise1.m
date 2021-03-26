@@ -5,29 +5,29 @@ clear; clc;
 
 % PART A
 
-% Define symbolic parameters
-syms theta1 theta2 theta3 L1 L2 L3;
+    % Define symbolic parameters
+    syms theta1 theta2 theta3 L1 L2 L3;
 
-% Define link parameter table
-linkParamTable = ...
-    [0 0 0 theta1;
-    0 L1 0 theta2;
-    0 L2 0 theta3];
+    % Define link parameter table
+    linkParamTable = ...
+        [0 0 0 theta1;
+        0 L1 0 theta2;
+        0 L2 0 theta3];
 
 % PART B
 
-% Identify transformation matrices for each link (I will append the
-% functions I use to the end of this pdf)
-Transform_01 = functions.links.Link2Transform(linkParamTable(1,:));
-Transform_12 = functions.links.Link2Transform(linkParamTable(2,:));
-Transform_23 = functions.links.Link2Transform(linkParamTable(3,:));
+    % Identify transformation matrices for each link (I will append the
+    % functions I use to the end of this pdf)
+    StepTransforms.Transform_01 = functions.links.Link2Transform(linkParamTable(1,:));
+    StepTransforms.Transform_12 = functions.links.Link2Transform(linkParamTable(2,:));
+    StepTransforms.Transform_23 = functions.links.Link2Transform(linkParamTable(3,:));
 
-% The transform to point H requires another row to the parameter table,
-% which I will append here:
-linkParamTable(4,:) = [0 L3 0 0];
+    % The transform to point H requires another row to the parameter table,
+    % which I will append here:
+    linkParamTable(4,:) = [0 L3 0 0];
 
-% Take new row and find appropriate transform:
-Transform_3H = functions.links.Link2Transform(linkParamTable(4,:));
+    % Take new row and find appropriate transform:
+    StepTransforms.Transform_3H = functions.links.Link2Transform(linkParamTable(4,:));
 
 % PART C
 
@@ -71,7 +71,14 @@ Transform_0H.simple = subs(Transform_0H.simple,...
 % Display results from simplified transforms
 display(Transform_03.simple); display(Transform_0H.simple);
 
-% Create quantified transforms for specific scenarios
+% Create quantified transform for scenario i (this one is quite simple)
 Transform_03.i = subs(Transform_03.trig, [theta1, theta2, theta3], [0 0 0]);
-Transform_03.ii = subs(Transform_03.trig, [theta1, theta2, theta3], [10 20 30]);
+
+% Create quantified transform for scenario ii. For this one, I will be
+% doing some math myself to replace the simplified substitutions in the
+% simplified transform to produce a simplified, quantified result.
+syms c60 s60 c10 c30 s10 s30; % In this case, these symbol #s are equal to the angle
+Transform_03.ii = subs(Transform_03.simple,...
+    [c123, s123, c1, c12, s1, s12],...
+    [c60, s60, c10, c30, s10, s30]);
 

@@ -1,4 +1,4 @@
-function plotTransform(transformMatrix)
+function plotTransform(transformMatrix,figureNumber)
 %PLOT3D This function looks to take a transform and move a frame, plotting
 %the original position and the final position
 oldFrame = eye(4);
@@ -31,9 +31,13 @@ newFrameY = functions.transform.rotationFromTransform(newFrame)*[0 frameSize 0]'
 newFrameZ = functions.transform.rotationFromTransform(newFrame)*[0 0 frameSize]'+newFrameOrigin;
 
 % Setup plot
-figure1 = figure(1);
+if ~exist('figureNumber','var')
+    figure;
+else
+    figure(figureNumber);
+end
 axis = [-axesSize,axesSize];
-xlim(axis);ylim(axis);zlim(axis);
+xlim(1.5*axis);ylim(1.5*axis);zlim(1.5*axis);
 xlabel('X Axis');ylabel('Y Axis');zlabel('Z Axis');
 zero = [0,0];
 plot3(axis,zero,zero,'--k');

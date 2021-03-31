@@ -10,6 +10,6 @@ function [linearAcceleration] = linearAcceleration(rotation_i_iplus1,omegaDot_ii
         vDot_ii (3,1)
     end
     
-    linearAcceleration = rotation_i_iplus1*(cross(omegaDot_ii,;
+    linearAcceleration = rotation_i_iplus1*(cross(omegaDot_ii,position_i_iplus1)+cross(omega_ii,cross(omega_ii,position_i_iplus1))+vDot_ii);
     
 end

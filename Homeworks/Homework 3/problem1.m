@@ -30,9 +30,19 @@ w_0 = 0; wDot_0 = 0;
 w_11 = functions.dynamics.angularVelocity(R01.',w_0,thetaDot_1);
 wDot_11 = functions.dynamics.angularAcceleration(R01.',wDot_0,w_0,thetaDot_1,thetaDotDot_1);
 vDot_11 = functions.dynamics.linearAccel(R01.',wDot_0,P_01,w_11,v0_dot);
-vCDot_11 = functions.dynamics.linearAccelCentroid(wDot_11,Pc_11,w_11,vDot_11);
+vcDot_11 = functions.dynamics.linearAccelCentroid(wDot_11,Pc_11,w_11,vDot_11);
 display(w_11);display(wDot_11);display(vDot_11);
 
-F_11 = functions.dynamics.F_ip1_ip1(m1,vCDot_11);
+F_11 = functions.dynamics.F_ip1_ip1(m1,vcDot_11);
 N_11 = functions.dynamics.N(wDot_11,w_11,Ic_11);
 display(F_11);display(N_11);
+
+w_22 = functions.dynamics.angularVelocity(R12.',w_11,thetaDot_2);
+wDot_22 = functions.dynamics.angularAcceleration(R12.',wDot_11,w_11,thetaDot_2,thetaDotDot_2);
+vDot_22 = functions.dynamics.linearAccel(R12.',wDot_11,P_01,w_11,vDot_11);
+vcDot_22 = functions.dynamics.linearAccelCentroid(wDot_22,Pc_22,w_22,vDot_22);
+display(w_22);display(wDot_22);display(vDot_22);display(vcDot_22);
+
+F_22 = functions.dynamics.F_ip1_ip1(m2,vcDot_22);
+N_22 = functions.dynamics.N(wDot_22,w_22,Ic_22);
+display(F_22);display(N_22);

@@ -44,3 +44,6 @@ display(w_22);display(wDot_22);display(vDot_22);display(vcDot_22);
 F_22 = functions.dynamics.F_ip1_ip1(m2,vCDot_22);
 N_22 = functions.dynamics.N(wDot_22,w_22,Ic_22);
 
+f_22 = F_22;
+n_22 = functions.dynamics.n_ii(N_22,R23,0,Pc_22,F_22,Pc_22,0);
+display(f_22);display(n_22);

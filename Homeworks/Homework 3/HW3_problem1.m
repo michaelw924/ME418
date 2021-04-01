@@ -42,7 +42,7 @@ w_0 = 0; wDot_0 = 0;
     w_22 = functions.dynamics.angularVelocity(R12.',w_11,thetaDot_2);
     wDot_22 = functions.dynamics.angularAcceleration(R12.',wDot_11,w_11,thetaDot_2,thetaDotDot_2);
     vDot_22 = functions.dynamics.linearAccel(R12.',wDot_11,P_01,w_11,vDot_11);
-    vcDot_22 = functions.dynamics.linearAccelCentroid(wDot_22,Pc_22,w_22,vDot_22);
+    vcDot_22 = functions.dynamics.linearAccelCentroid(wDot_22,[L1 0 0],w_22,vDot_22);
     display(w_22);display(wDot_22);display(vDot_22);display(vcDot_22);
 
     F_22 = functions.dynamics.F_ip1_ip1(m2,vcDot_22);

@@ -22,6 +22,7 @@ v0_dot = [0 0 g].';
 
 % Define initial conditions
 P_01 = [0 0 0]; 
+P_12 = L1 * [1 0 0];
 Pc_11 = L1*[1 0 0].';
 Pc_22 = L2*[1 0 0].';
 Ic_11 = 0; Ic_22 = 0;
@@ -41,8 +42,8 @@ w_0 = 0; wDot_0 = 0;
 
     w_22 = functions.dynamics.angularVelocity(R12.',w_11,thetaDot_2);
     wDot_22 = functions.dynamics.angularAcceleration(R12.',wDot_11,w_11,thetaDot_2,thetaDotDot_2);
-    vDot_22 = functions.dynamics.linearAccel(R12.',wDot_11,P_01,w_11,vDot_11);
-    vcDot_22 = functions.dynamics.linearAccelCentroid(wDot_22,[L1 0 0],w_22,vDot_22);
+    vDot_22 = functions.dynamics.linearAccel(R12.',wDot_11,P_12,w_11,vDot_11);
+    vcDot_22 = functions.dynamics.linearAccelCentroid(wDot_22,Pc_22,w_22,vDot_22);
     display(w_22);display(wDot_22);display(vDot_22);display(vcDot_22);
 
     F_22 = functions.dynamics.F_ip1_ip1(m2,vcDot_22);

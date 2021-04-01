@@ -3,9 +3,9 @@ function [N] = N(omegaDot_ii,omega_ii,Ic)
 % transform matrix.
 %   Detailed explanation goes here
     arguments
-        Ic (3,3)
         omegaDot_ii (3,1)
         omega_ii (3,1)
+        Ic (3,3)
     end
     
     N = (Ic * omegaDot_ii) + cross(omega_ii, Ic * omega_ii);

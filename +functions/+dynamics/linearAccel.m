@@ -1,4 +1,4 @@
-function [linearAcceleration] = linearAcceleration(rotation_i_iplus1,omegaDot_ii,position_i_iplus1,omega_ii,vDot_ii)
+function [linearAcceleration] = linearAccel(rotation_i_iplus1,omegaDot_ii,position_i_iplus1,omega_ii,vDot_ii)
 % This function is intended to convert a link matrix table to an overall
 % transform matrix.
 %   Detailed explanation goes here

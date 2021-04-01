@@ -14,8 +14,8 @@ R01 = functions.transform.rotationFromTransform(T01);
 R12 = functions.transform.rotationFromTransform(T12);
 R23 = functions.transform.rotationFromTransform(T23);
 
-syms thetaDot_1 thetaDotDot_1 g;
-syms c1 s1;
+syms thetaDot_1 thetaDotDot_1 thetaDot_2 thetaDotDot_2 thetaDot_3 thetaDotDot_3 g;
+syms c1 c2 c3 s1 s2 s3 m1 m2;
 
 v0_dot = [0 0 g].';
 
@@ -41,5 +41,6 @@ vDot_22 = functions.dynamics.linearAccel(R12.',wDot_11,P_01,w_11,vDot_11);
 vcDot_22 = functions.dynamics.linearAccelCentroid(wDot_22,Pc_22,w_22,vDot_22);
 display(w_22);display(wDot_22);display(vDot_22);display(vcDot_22);
 
-F_22 = functions.dynamics.F_ip1_ip1
+F_22 = functions.dynamics.F_ip1_ip1(m2,vCDot_22);
+N_22 = functions.dynamics.N(wDot_22,w_22,Ic_22);
 

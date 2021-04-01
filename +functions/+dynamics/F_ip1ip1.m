@@ -1,13 +1,12 @@
-function [f] = f_i_i(rotation_ip1_i,f_ip1_ip1,F)
+function [F] = F_ip1ip1(m_ip1, vcdot_ip1_ip1)
 % This function is intended to convert a link matrix table to an overall
 % transform matrix.
 %   Detailed explanation goes here
     arguments
-        rotation_ip1_i (3,3)
-        f_ip1_ip1 (3,1)
-        F (3,1)
+        m_ip1 
+        vcdot_ip1_ip1 (3,1)
     end
     
-    f = (rotation_ip1_i * f_ip1_ip1) + F;
+    F = m_ip1 .* vcdot_ip1_ip1;
     
 end

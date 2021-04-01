@@ -1,4 +1,4 @@
-function [linearAccelCentroid] = linearAccelCentroid(omegaDot_ip1_ip1,positionC_i_iplus1,omega_ip1_ip1,vDot_ip1_ip1)
+function [linearAccelCentroid] = vcDot_ip1ip1(omegaDot_ip1_ip1,positionC_i_iplus1,omega_ip1_ip1,vDot_ip1_ip1)
 % This function is intended to convert a link matrix table to an overall
 % transform matrix.
 %   Detailed explanation goes here

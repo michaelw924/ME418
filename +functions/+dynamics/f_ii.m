@@ -1,11 +1,13 @@
-function [tau] = tau(n_i_i)
+function [f] = f_ii(rotation_ip1_i,f_ip1_ip1,F)
 % This function is intended to convert a link matrix table to an overall
 % transform matrix.
 %   Detailed explanation goes here
     arguments
-        n_i_i (3,1)
+        rotation_ip1_i (3,3)
+        f_ip1_ip1 (3,1)
+        F (3,1)
     end
     
-    tau = n_i_i' * [0 0 1];
+    f = (rotation_ip1_i * f_ip1_ip1) + F;
     
 end

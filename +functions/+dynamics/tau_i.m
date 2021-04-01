@@ -1,12 +1,11 @@
-function [F] = F_ip1_ip1(m_ip1, vcdot_ip1_ip1)
+function [tau] = tau_i(n_i_i)
 % This function is intended to convert a link matrix table to an overall
 % transform matrix.
 %   Detailed explanation goes here
     arguments
-        m_ip1 
-        vcdot_ip1_ip1 (3,1)
+        n_i_i (3,1)
     end
     
-    F = m_ip1 .* vcdot_ip1_ip1;
+    tau = n_i_i' * [0 0 1];
     
 end

@@ -1,4 +1,4 @@
-function [angularAcceleration] = angularAcceleration(rotation_i_iplus1,omegaDot_ii,omega_ii,thetaDot,thetaDotDot)
+function [angularAcceleration] = omegaDot_ip1ip1(rotation_i_iplus1,omegaDot_ii,omega_ii,thetaDot,thetaDotDot)
 % This function is intended to convert a link matrix table to an overall
 % transform matrix.
 %   Detailed explanation goes here

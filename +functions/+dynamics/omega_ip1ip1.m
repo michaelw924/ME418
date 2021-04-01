@@ -1,4 +1,4 @@
-function [angularVelocity] = angularVelocity(rotation_i_iplus1,angular_ii,thetadot)
+function [angularVelocity] = omega_ip1ip1(rotation_i_iplus1,angular_ii,thetadot)
 % This function is intended to convert a link matrix table to an overall
 % transform matrix.
 %   Detailed explanation goes here

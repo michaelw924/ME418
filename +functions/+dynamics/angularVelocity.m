@@ -5,7 +5,7 @@ function [angularVelocity] = angularVelocity(rotation_i_iplus1,angular_ii,thetad
     arguments
         rotation_i_iplus1 (3,3)
         angular_ii (3,1)
-        thetadot double
+        thetadot
     end
     
     angularVelocity = rotation_i_iplus1*angular_ii + thetadot*[0 0 1]';

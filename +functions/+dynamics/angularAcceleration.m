@@ -6,8 +6,8 @@ function [angularAcceleration] = angularAcceleration(rotation_i_iplus1,omegaDot_
         rotation_i_iplus1 (3,3)
         omegaDot_ii (3,1)
         omega_ii (3,1)
-        thetaDot double
-        thetaDotDot double
+        thetaDot 
+        thetaDotDot 
     end
     
     angularAcceleration = rotation_i_iplus1*omegaDot_ii + cross((rotation_i_iplus1*omega_ii),(thetaDot*[0 0 1]')) + thetaDotDot*[0 0 1]';

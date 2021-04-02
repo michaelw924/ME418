@@ -1,4 +1,4 @@
-function [linearAcceleration] = vDotDot_ip1ip1(rotation_i_ip1,omegaDot_ii,position_i_ip1,omega_ii,vDot_ii,omega_ip1ip1,dDot_ip1ip1,dDotDot_ip1ip1)
+function [linearAcceleration] = vDot_ip1ip1_prism(rotation_i_ip1,omegaDot_ii,position_i_ip1,omega_ii,vDot_ii,omega_ip1ip1,dDot_ip1ip1,dDotDot_ip1ip1)
 % This function is intended to convert a link matrix table to an overall
 % transform matrix.
 %   Detailed explanation goes here

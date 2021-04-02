@@ -1,11 +1,11 @@
-function [tau] = tau_i(n_i_i)
-% This function is intended to convert a link matrix table to an overall
-% transform matrix.
-%   Detailed explanation goes here
+function [torque] = tau_i(n_ii)
+% This function takes the calculated torque matrix for the entire joint and
+% reduces it to just the Z component (the Z-axis of the joint is the joint
+% axis
     arguments
-        n_i_i (3,1)
+        n_ii (3,1)
     end
     
-    tau = n_i_i' * [0 0 1];
+    torque = n_ii(3);
     
 end

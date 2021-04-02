@@ -1,7 +1,6 @@
 function [N] = N_ip1ip1(omegaDot_ii,omega_ii,Ic)
-% This function is intended to convert a link matrix table to an overall
-% transform matrix.
-%   Detailed explanation goes here
+% This function summarizes the torques at a joint at the current link. 
+% Eqn. 6.50 in the textbook.
     arguments
         omegaDot_ii (3,1)
         omega_ii (3,1)

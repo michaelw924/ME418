@@ -1,7 +1,6 @@
 function [torque] = tau_i(n_ii)
-% This function takes the calculated torque matrix for the entire joint and
-% reduces it to just the Z component (the Z-axis of the joint is the joint
-% axis
+% This function isolates the z term (for the joint axis) of the torque
+% summary. Eqn. 6.53 in the textbook.
     arguments
         n_ii (3,1)
     end

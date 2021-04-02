@@ -1,12 +1,11 @@
-function [F] = F_ip1ip1(m_ip1, vcdot_ip1_ip1)
-% This function is intended to convert a link matrix table to an overall
-% transform matrix.
-%   Detailed explanation goes here
+function [F] = F_ip1ip1(m_ip1, vcdot_ip1ip1)
+% This function summarizes the forces at the current link. 
+% Eqn. 6.49 in the textbook.
     arguments
         m_ip1 
-        vcdot_ip1_ip1 (3,1)
+        vcdot_ip1ip1 (3,1)
     end
     
-    F = m_ip1 .* vcdot_ip1_ip1;
+    F = m_ip1 .* vcdot_ip1ip1;
     
 end

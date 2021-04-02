@@ -1,13 +1,12 @@
-function [f] = f_ii(rotation_ip1_i,f_ip1_ip1,F)
-% This function is intended to convert a link matrix table to an overall
-% transform matrix.
-%   Detailed explanation goes here
+function [f] = f_ii(rotation_ip1i,f_ip1ip1,F)
+% This function summarizes the forces at a joint from the previous link and
+% the current link. Eqn. 6.51 in the textbook.
     arguments
-        rotation_ip1_i (3,3)
-        f_ip1_ip1 (3,1)
+        rotation_ip1i (3,3)
+        f_ip1ip1 (3,1)
         F (3,1)
     end
     
-    f = (rotation_ip1_i * f_ip1_ip1) + F;
+    f = (rotation_ip1i * f_ip1ip1) + F;
     
 end

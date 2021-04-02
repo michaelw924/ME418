@@ -1,3 +1,5 @@
+%% Homework 3 - Problem 1
+% Coded by Michael White
 clear;clc;
 % Setup portion
     % Define necessary link parameters and link table

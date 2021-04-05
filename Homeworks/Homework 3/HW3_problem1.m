@@ -59,7 +59,7 @@ clear;clc;
     f_11 = functions.dynamics.f_ii(R12,f_22,F_11);
     n_11 = functions.dynamics.n_ii(N_11,R12,n_22,Pc_11,F_11,P_12,0);
     tau_1 = functions.dynamics.tau_i(n_11);
-
+    
 % Cleanup tau_1 and tau_2 and display
     syms c1 c2 s1 s2;
     tau_1 = subs(tau_1,[cos(theta1),cos(theta2),sin(theta1),sin(theta2)],[c1,c2,s1,s2]);

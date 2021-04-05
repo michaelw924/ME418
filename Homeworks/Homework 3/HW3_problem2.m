@@ -59,8 +59,8 @@ clear;clc;
     tau_1 = functions.dynamics.tau_i(n_11);
 
 % Cleanup tau_1 and tau_2
-syms c1 c2 s1 s2;
-tau_1 = subs(tau_1,[cos(theta1),cos(theta2),sin(theta1),sin(theta2)],[c1,c2,s1,s2]);
-tau_2 = subs(tau_2,[cos(theta1),cos(theta2),sin(theta1),sin(theta2)],[c1,c2,s1,s2]);
-display(tau_1);
-display(tau_2);
+    syms c1 c2 s1 s2;
+    tau_1 = subs(tau_1,[cos(theta1),cos(theta2),sin(theta1),sin(theta2)],[c1,c2,s1,s2]);
+    tau_2 = subs(tau_2,[cos(theta1),cos(theta2),sin(theta1),sin(theta2)],[c1,c2,s1,s2]);
+    display(tau_1);
+    display(tau_2);

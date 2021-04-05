@@ -33,7 +33,6 @@ v_11 = [0 0 0].';
 % Functions needed for v_22
 w_11 = functions.dynamics.omega_ip1ip1(R01,w_0,thetaDot_1);
 v_22 = functions.dynamics.v_ip1ip1_prism(R12,v_11,w_11,P_12,dDot_2);
-display(v_22);
 
 % Solve for J_2
 v_22 = v_22([1,3],:);
@@ -56,4 +55,13 @@ G = G.*eye(2);
 Mx = simplify(((J_2^-1).').*M.*(J_2^-1));
 Vx = simplify(((J_2^-1).')*(V-M*(J_2^-1)*JDot_2*thetaDot_1));
 Gx = simplify(((J_2^-1).')*G);
-disp(Mx);disp(Vx);disp(Gx);
+
+% Simplify answers to column vectors
+Mx = [Mx(1,1); Mx(2,2)];
+Vx = [Vx(1,1); Vx(2,2)];
+Gx = [Gx(1,1); Gx(2,2)];
+
+% Display answers
+disp('Mx = ');disp(Mx);
+disp('Vx = ');disp(Vx);
+disp('Gx = ');disp(Gx);

@@ -4,7 +4,7 @@ clear;clc;
 
 % Setup Portion
     % Dynamic equations using Newton-Euler formulation
-    syms d_2 dDot_2 dDotDot_2 theta1 thetaDot_1 thetaDotDot_1 theta2 thetaDot_2 thetaDotDot_2 g Ixx_1 Iyy_1 Izz_1;
+    syms d_2 dDot_2 dDotDot_2 theta1 thetaDot_1 thetaDotDot_1 theta2 thetaDot_2 thetaDotDot_2 g Ixx_1 Iyy_1 Izz_1 m1 m2;
     linkTable = [0 0 0 theta1; -pi/2 0 d_2 0];
 
     % Define transforms for each link from table

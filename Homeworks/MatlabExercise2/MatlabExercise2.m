@@ -3,22 +3,53 @@
 % 3/26/2021
 clear; clc; close all;
 
-% Part A "by hand"
-syms L1 L2 L3 c1 c2 c3 s1 s2 s3 cphi sphi X Y;
+%% Part A "by hand"
+    syms L1 L2 L3 cphi sphi x y;
 
-% Generate known transforms in symbolic form
-tforms.T_01 = [c1 -s1 0 0; c1 s1 0 0; 0 0 1 0; 0 0 0 1];
-tforms.T_12 = [c2 -s2 0 L1; c2 s2 0 0; 0 0 1 0; 0 0 0 1];
-tforms.T_23 = [c3 -s3 0 L2; c3 s3 0 0; 0 0 1 0; 0 0 0 1];
-tforms.T_3H = [1 0 0 L3; 0 1 0 0; 0 0 1 0; 0 0 0 1];
-tforms.T_0H = [cphi -sphi 0 X; cphi sphi 0 Y; 0 0 1 0; 0 0 0 1];
+    % Generate known transforms in symbolic form
+    tforms.T_3H = [1 0 0 L3; 0 1 0 0; 0 0 1 0; 0 0 0 1];
+    tforms.T_0H = [cphi -sphi 0 x; cphi sphi 0 y; 0 0 1 0; 0 0 0 1];
 
-% Calculate theta2 using equations 4.14-4.16 from textbook
-tforms.T_03 = tforms.T_0H/tforms.T_3H;
-c2 = (tforms.T_03(1,4)^2+tforms.T_03(2,4)^2-L1^2-L3^2)/(2*L1*L3);
-s2 = sqrt(1-c2^2);
-theta2 = atan2(s2,c2);
+    % Calculate theta2 using equations 4.14-4.16 from textbook
+    tforms.T_03 = tforms.T_0H/tforms.T_3H;
+    c2 = (tforms.T_03(1,4)^2+tforms.T_03(2,4)^2-L1^2-L3^2)/(2*L1*L3);
+    s2 = sqrt(1-c2^2);
+    theta2 = atan2(s2,c2);
 
-k1 = L1+s2*L2;
-k2 = L2*s2;
-r = sqrt(k1^2+k2^2);
+    % Calculate theta1 from equations 4.19 and 4.27 in the textbook
+    k1 = L1+s2*L2;
+    k2 = L2*s2;
+    theta1 = atan2(y,x)-atan2(k2,k1);
+
+    % Calculate theta3 from equation 4.28 in the textbook
+    phi = atan2(sphi,cphi);
+    theta3 = phi - theta1 - theta2;
+
+    % Display symbolic results
+    disp("Theta 1 = "); disp(theta1);
+    disp("Theta 2 = "); disp(theta2);
+    disp("Theta 3 = "); disp(theta3);
+
+%% Part B: Testing Examples
+    examples.i.T = [1 0 0 9; 0 1 0 0; 0 0 1 0; 0 0 0 1];
+    examples.ii.T = [0.5 -0.866 0 7.5373; 0.866 0.5 0 3.9266; 0 0 1 0; 0 0 0 1];
+    examples.iii.T = [1 0 0 9; 0 1 0 0; 0 0 1 0; 0 0 0 1];
+    examples.iv.T = [0.866 0.5 0 -3.1245; -0.5 0.866 0 9.1674; 0 0 1 0; 0 0 0 1];
+    nameList = {'i' 'ii' 'iii' 'iv'};
+
+    for i = 1:length(nameList)
+        examples.(char(nameList(i))).theta_rad(1) = double(subs(theta1,...
+            [sphi cphi x y L1 L2 L3],...
+            [examples.(char(nameList(i))).T(2,1) examples.(char(nameList(i))).T(1,1)...
+            examples.(char(nameList(i))).T(1,4) examples.(char(nameList(i))).T(2,4) 4 3 2]));
+        examples.(char(nameList(i))).theta_rad(2) = double(subs(theta3,...
+            [sphi cphi x y L1 L2 L3],...
+            [examples.(char(nameList(i))).T(2,1) examples.(char(nameList(i))).T(1,1)...
+            examples.(char(nameList(i))).T(1,4) examples.(char(nameList(i))).T(2,4) 4 3 2]));
+        examples.(char(nameList(i))).theta_rad(3) = double(subs(theta2,...
+            [sphi cphi x y L1 L2 L3],...
+            [examples.(char(nameList(i))).T(2,1) examples.(char(nameList(i))).T(1,1)...
+            examples.(char(nameList(i))).T(1,4) examples.(char(nameList(i))).T(2,4) 4 3 2]));
+        
+        examples.(char(nameList(i))).theta_deg = 180/pi*examples.(char(nameList(i))).theta_rad;
+    end

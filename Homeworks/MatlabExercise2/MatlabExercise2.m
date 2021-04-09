@@ -55,4 +55,23 @@ clear; clc; close all;
         examples.(char(nameList(i))).theta_deg = 180/pi*examples.(char(nameList(i))).theta_rad;
     end
     
-    %% Part C: Validating with 
+%% Part C: Validating with Corke
+L(1) = Link([0 4 0 pi/2]);
+L(2) = Link([0 3 0 0]);
+L(3) = Link([0 2 0 0]);
+robot = SerialLink(L);
+
+T = examples.i.T;
+
+robot.ikine(T,'mask',[1 1 1 0 0 0]);
+
+%     p3 = SerialLink([
+%         RevoluteMDH('d', 0, 'a', 0, 'alpha', 0, 'standard')
+%         RevoluteMDH('d', 0, 'a', 4, 'alpha', 0, 'standard')
+%         RevoluteMDH('d', 0, 'a', 3, 'alpha', 0, 'standard')
+%         RevoluteMDH('d', 0, 'a', 2, 'alpha', 0, 'standard')
+%         ], ...
+%         'name', 'planar 3 link');
+%     qz = [0 0 0];
+
+%     qi = p3.ikine3(SE3(examples.i.T));

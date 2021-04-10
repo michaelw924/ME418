@@ -1,0 +1,318 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>MatlabExercise2</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-04-09"><meta name="DC.source" content="MatlabExercise2.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">MATLAB_Exercise_2</a></li><li><a href="#2">Part A "by hand"</a></li><li><a href="#3">Part B: Testing Examples</a></li><li><a href="#4">Part C: Validating with Corke</a></li></ul></div><h2 id="1">MATLAB_Exercise_2</h2><p>Michael White 3/26/2021</p><pre class="codeinput">clear; clc; close <span class="string">all</span>;
+</pre><h2 id="2">Part A "by hand"</h2><pre class="codeinput">    syms <span class="string">L1</span> <span class="string">L2</span> <span class="string">L3</span> <span class="string">cphi</span> <span class="string">sphi</span> <span class="string">x</span> <span class="string">y</span>;
+
+    <span class="comment">% Generate known transforms in symbolic form (flip signs of sines for</span>
+    <span class="comment">% inputs to be the same)</span>
+    tforms.T_3H = [1 0 0 L3; 0 1 0 0; 0 0 1 0; 0 0 0 1];
+    tforms.T_0H = [cphi sphi 0 x; -sphi cphi 0 y; 0 0 1 0; 0 0 0 1];
+
+    <span class="comment">% Calculate theta2 using equations 4.14-4.16 from textbook</span>
+    tforms.T_03 = tforms.T_0H/tforms.T_3H;
+    c2 = (tforms.T_03(1,4)^2+tforms.T_03(2,4)^2-L1^2-L2^2)/(2*L1*L2);
+    s2 = sqrt(1-c2^2);
+    theta2 = atan2(s2,c2);
+
+    <span class="comment">% Calculate theta1 from equations 4.19 and 4.27 in the textbook</span>
+    k1 = L1+c2*L2;
+    k2 = L2*s2;
+    theta1 = atan2(tforms.T_03(2,4),tforms.T_03(1,4))-atan2(k2,k1);
+
+    <span class="comment">% Calculate theta3 from equation 4.28 in the textbook</span>
+    phi = -atan2(sphi,cphi);
+    theta3 = phi - theta1 - theta2;
+
+    <span class="comment">% Display symbolic results</span>
+    disp(<span class="string">"Theta 1 = "</span>); disp(theta1);
+    disp(<span class="string">"Theta 2 = "</span>); disp(theta2);
+    disp(<span class="string">"Theta 3 = "</span>); disp(theta3);
+</pre><pre class="codeoutput">Theta 1 = 
+atan2(y + L3*sphi, x - L3*cphi) - atan2(L2*(1 - ((x - L3*cphi)^2 + (y + L3*sphi)^2 - L1^2 - L2^2)^2/(4*L1^2*L2^2))^(1/2), L1 + ((x - L3*cphi)^2 + (y + L3*sphi)^2 - L1^2 - L2^2)/(2*L1))
+ 
+Theta 2 = 
+atan2(2*(1 - ((x - L3*cphi)^2 + (y + L3*sphi)^2 - L1^2 - L2^2)^2/(4*L1^2*L2^2))^(1/2), ((x - L3*cphi)^2 + (y + L3*sphi)^2 - L1^2 - L2^2)/(L1*L2))
+ 
+Theta 3 = 
+- atan2(y + L3*sphi, x - L3*cphi) + atan2(L2*(1 - ((x - L3*cphi)^2 + (y + L3*sphi)^2 - L1^2 - L2^2)^2/(4*L1^2*L2^2))^(1/2), L1 + ((x - L3*cphi)^2 + (y + L3*sphi)^2 - L1^2 - L2^2)/(2*L1)) - atan2(2*(1 - ((x - L3*cphi)^2 + (y + L3*sphi)^2 - L1^2 - L2^2)^2/(4*L1^2*L2^2))^(1/2), ((x - L3*cphi)^2 + (y + L3*sphi)^2 - L1^2 - L2^2)/(L1*L2)) - atan2(sphi, cphi)
+ 
+</pre><h2 id="3">Part B: Testing Examples</h2><p>Generate transform matrices for each example</p><pre class="codeinput">    examples.i.T_0H = [1 0 0 9; 0 1 0 0; 0 0 1 0; 0 0 0 1];
+    examples.ii.T_0H = [0.5 -0.866 0 7.5373; 0.866 0.5 0 3.9266; 0 0 1 0; 0 0 0 1];
+    examples.iii.T_0H = [0 1 0 -3; -1 0 0 2; 0 0 1 0; 0 0 0 1];
+    examples.iv.T_0H = [0.866 0.5 0 -3.1245; -0.5 0.866 0 9.1674; 0 0 1 0; 0 0 0 1];
+    nameList = {<span class="string">'i'</span> <span class="string">'ii'</span> <span class="string">'iii'</span> <span class="string">'iv'</span>};
+
+    <span class="keyword">for</span> i = 1:length(nameList)
+        <span class="comment">%Check to see if points are even in reach of the manipulator</span>
+        totalDistance = sqrt(examples.(char(nameList(i))).T_0H(1,4)^2 +<span class="keyword">...</span>
+            examples.(char(nameList(i))).T_0H(2,4)^2);
+        <span class="keyword">if</span> totalDistance &gt; 9
+            disp(strcat(<span class="string">"Example "</span>,char(nameList(i)),<span class="string">" is out of reach"</span>));
+        <span class="keyword">else</span>
+            <span class="comment">% Calculate values for each theta from sym eqns with subs</span>
+            examples.(char(nameList(i))).theta_rad(1) = double(subs(theta1,<span class="keyword">...</span>
+                [sphi cphi x y L1 L2 L3],<span class="keyword">...</span>
+                [examples.(char(nameList(i))).T_0H(1,2) examples.(char(nameList(i))).T_0H(1,1)<span class="keyword">...</span>
+                examples.(char(nameList(i))).T_0H(1,4) examples.(char(nameList(i))).T_0H(2,4) 4 3 2]));
+            examples.(char(nameList(i))).theta_rad(2) = double(subs(theta2,<span class="keyword">...</span>
+                [sphi cphi x y L1 L2 L3],<span class="keyword">...</span>
+                [examples.(char(nameList(i))).T_0H(1,2) examples.(char(nameList(i))).T_0H(1,1)<span class="keyword">...</span>
+                examples.(char(nameList(i))).T_0H(1,4) examples.(char(nameList(i))).T_0H(2,4) 4 3 2]));
+            examples.(char(nameList(i))).theta_rad(3) = double(subs(theta3,<span class="keyword">...</span>
+                [sphi cphi x y L1 L2 L3],<span class="keyword">...</span>
+                [examples.(char(nameList(i))).T_0H(1,2) examples.(char(nameList(i))).T_0H(1,1)<span class="keyword">...</span>
+                examples.(char(nameList(i))).T_0H(1,4) examples.(char(nameList(i))).T_0H(2,4) 4 3 2]));
+
+            examples.(char(nameList(i))).theta_deg = 180/pi*examples.(char(nameList(i))).theta_rad;
+
+            <span class="comment">% The third angle in the third example was computing as</span>
+            <span class="comment">% negative, so I added this check</span>
+            <span class="keyword">for</span> j = 1:3
+                <span class="keyword">if</span> examples.(char(nameList(i))).theta_deg(j) &lt; 0
+                    examples.(char(nameList(i))).theta_deg(j) = <span class="keyword">...</span>
+                        examples.(char(nameList(i))).theta_deg(j)+360;
+                <span class="keyword">end</span>
+            <span class="keyword">end</span>
+
+            <span class="comment">% Display results to command window</span>
+            disp(strcat(<span class="string">"Joint angles for example "</span>,char(nameList(i))));
+            disp(examples.(char(nameList(i))).theta_deg);
+        <span class="keyword">end</span>
+
+        <span class="comment">% Setup example transforms for validation part</span>
+        examples.(char(nameList(i))).T_3H = double(subs(tforms.T_3H,<span class="keyword">...</span>
+            [sphi cphi x y L1 L2 L3],<span class="keyword">...</span>
+            [examples.(char(nameList(i))).T_0H(1,2) examples.(char(nameList(i))).T_0H(1,1)<span class="keyword">...</span>
+            examples.(char(nameList(i))).T_0H(1,4) examples.(char(nameList(i))).T_0H(2,4) 4 3 2]));
+        examples.(char(nameList(i))).T_03 = examples.(char(nameList(i))).T_0H<span class="keyword">...</span>
+            /examples.(char(nameList(i))).T_3H;
+    <span class="keyword">end</span>
+</pre><pre class="codeoutput">Joint angles for example i
+     0     0     0
+
+Joint angles for example ii
+    9.9999   20.0004   29.9989
+
+Joint angles for example iii
+    90    90    90
+
+Example iv is out of reach
+</pre><h2 id="4">Part C: Validating with Corke</h2><p>Generate robot from link parameters</p><pre class="codeinput">    L(1) = Link([0 0 4 0],<span class="string">'mod'</span>);
+    L(2) = Link([0 0 3 0],<span class="string">'mod'</span>);
+    L(3) = Link([0 0 0 0],<span class="string">'mod'</span>);
+    robot = SerialLink(L);
+
+    <span class="comment">% Calculate thetas from inverse kinematics of example transforms</span>
+    corke.i.theta_rad = robot.ikine(examples.i.T_03,[0 0 0],<span class="string">'mask'</span>,[1 1 0 0 0 1]);
+    corke.ii.theta_rad = robot.ikine(examples.ii.T_03,[0 0 0],<span class="string">'mask'</span>,[1 1 0 0 0 1]);
+    corke.iii.theta_rad = robot.ikine(examples.iii.T_03,[90 90 -270]*pi/180,<span class="string">'mask'</span>,[1 -1 0 0 0 1]);
+    corke.iv.theta_rad = robot.ikine(examples.iv.T_03,[0 0 0],<span class="string">'mask'</span>,[1 1 0 0 0 1]);
+    <span class="comment">% The example iv does NOT converge, which matches our calculated result</span>
+
+    disp(<span class="string">'Results from Corke toolbox:'</span>);
+
+    <span class="keyword">for</span> i = 1:length(nameList)
+        <span class="keyword">if</span> ~isempty(corke.(char(nameList(i))).theta_rad)
+            corke.(char(nameList(i))).theta_deg = corke.(char(nameList(i))).theta_rad*180/pi;
+            disp(strcat(<span class="string">"The Corke joint angles for example "</span>,char(nameList(i)),<span class="string">':'</span>));
+            disp(corke.(char(nameList(i))).theta_deg);
+        <span class="keyword">else</span>
+            disp(strcat(<span class="string">"No valid joint angles for example "</span>,char(nameList(i))));
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+</pre><pre class="codeoutput">Warning: ikine: iteration limit 500 exceeded (pose 1), final err 4.26772 
+Warning: failed to converge: try a different initial value of joint coordinates 
+Results from Corke toolbox:
+The Corke joint angles for example i:
+     0     0     0
+
+The Corke joint angles for example ii:
+    9.9999   20.0004   29.9989
+
+The Corke joint angles for example iii:
+   90.0000   90.0000   90.0000
+
+No valid joint angles for example iv
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% MATLAB_Exercise_2
+% Michael White
+% 3/26/2021
+clear; clc; close all;
+
+%% Part A "by hand"
+    syms L1 L2 L3 cphi sphi x y;
+
+    % Generate known transforms in symbolic form (flip signs of sines for
+    % inputs to be the same)
+    tforms.T_3H = [1 0 0 L3; 0 1 0 0; 0 0 1 0; 0 0 0 1];
+    tforms.T_0H = [cphi sphi 0 x; -sphi cphi 0 y; 0 0 1 0; 0 0 0 1];
+
+    % Calculate theta2 using equations 4.14-4.16 from textbook
+    tforms.T_03 = tforms.T_0H/tforms.T_3H;
+    c2 = (tforms.T_03(1,4)^2+tforms.T_03(2,4)^2-L1^2-L2^2)/(2*L1*L2);
+    s2 = sqrt(1-c2^2);
+    theta2 = atan2(s2,c2);
+
+    % Calculate theta1 from equations 4.19 and 4.27 in the textbook
+    k1 = L1+c2*L2;
+    k2 = L2*s2;
+    theta1 = atan2(tforms.T_03(2,4),tforms.T_03(1,4))-atan2(k2,k1);
+
+    % Calculate theta3 from equation 4.28 in the textbook
+    phi = -atan2(sphi,cphi);
+    theta3 = phi - theta1 - theta2;
+
+    % Display symbolic results
+    disp("Theta 1 = "); disp(theta1);
+    disp("Theta 2 = "); disp(theta2);
+    disp("Theta 3 = "); disp(theta3);
+
+%% Part B: Testing Examples
+    % Generate transform matrices for each example
+    examples.i.T_0H = [1 0 0 9; 0 1 0 0; 0 0 1 0; 0 0 0 1];
+    examples.ii.T_0H = [0.5 -0.866 0 7.5373; 0.866 0.5 0 3.9266; 0 0 1 0; 0 0 0 1];
+    examples.iii.T_0H = [0 1 0 -3; -1 0 0 2; 0 0 1 0; 0 0 0 1];
+    examples.iv.T_0H = [0.866 0.5 0 -3.1245; -0.5 0.866 0 9.1674; 0 0 1 0; 0 0 0 1];
+    nameList = {'i' 'ii' 'iii' 'iv'};
+    
+    for i = 1:length(nameList)
+        %Check to see if points are even in reach of the manipulator
+        totalDistance = sqrt(examples.(char(nameList(i))).T_0H(1,4)^2 +...
+            examples.(char(nameList(i))).T_0H(2,4)^2);
+        if totalDistance > 9
+            disp(strcat("Example ",char(nameList(i))," is out of reach"));
+        else
+            % Calculate values for each theta from sym eqns with subs
+            examples.(char(nameList(i))).theta_rad(1) = double(subs(theta1,...
+                [sphi cphi x y L1 L2 L3],...
+                [examples.(char(nameList(i))).T_0H(1,2) examples.(char(nameList(i))).T_0H(1,1)...
+                examples.(char(nameList(i))).T_0H(1,4) examples.(char(nameList(i))).T_0H(2,4) 4 3 2]));
+            examples.(char(nameList(i))).theta_rad(2) = double(subs(theta2,...
+                [sphi cphi x y L1 L2 L3],...
+                [examples.(char(nameList(i))).T_0H(1,2) examples.(char(nameList(i))).T_0H(1,1)...
+                examples.(char(nameList(i))).T_0H(1,4) examples.(char(nameList(i))).T_0H(2,4) 4 3 2]));
+            examples.(char(nameList(i))).theta_rad(3) = double(subs(theta3,...
+                [sphi cphi x y L1 L2 L3],...
+                [examples.(char(nameList(i))).T_0H(1,2) examples.(char(nameList(i))).T_0H(1,1)...
+                examples.(char(nameList(i))).T_0H(1,4) examples.(char(nameList(i))).T_0H(2,4) 4 3 2]));
+            
+            examples.(char(nameList(i))).theta_deg = 180/pi*examples.(char(nameList(i))).theta_rad;
+            
+            % The third angle in the third example was computing as
+            % negative, so I added this check
+            for j = 1:3
+                if examples.(char(nameList(i))).theta_deg(j) < 0
+                    examples.(char(nameList(i))).theta_deg(j) = ...
+                        examples.(char(nameList(i))).theta_deg(j)+360;
+                end
+            end
+            
+            % Display results to command window
+            disp(strcat("Joint angles for example ",char(nameList(i))));
+            disp(examples.(char(nameList(i))).theta_deg);
+        end
+        
+        % Setup example transforms for validation part
+        examples.(char(nameList(i))).T_3H = double(subs(tforms.T_3H,...
+            [sphi cphi x y L1 L2 L3],...
+            [examples.(char(nameList(i))).T_0H(1,2) examples.(char(nameList(i))).T_0H(1,1)...
+            examples.(char(nameList(i))).T_0H(1,4) examples.(char(nameList(i))).T_0H(2,4) 4 3 2]));
+        examples.(char(nameList(i))).T_03 = examples.(char(nameList(i))).T_0H...
+            /examples.(char(nameList(i))).T_3H;
+    end
+    
+%% Part C: Validating with Corke
+    % Generate robot from link parameters
+    L(1) = Link([0 0 4 0],'mod');
+    L(2) = Link([0 0 3 0],'mod');
+    L(3) = Link([0 0 0 0],'mod');
+    robot = SerialLink(L);
+
+    % Calculate thetas from inverse kinematics of example transforms
+    corke.i.theta_rad = robot.ikine(examples.i.T_03,[0 0 0],'mask',[1 1 0 0 0 1]);
+    corke.ii.theta_rad = robot.ikine(examples.ii.T_03,[0 0 0],'mask',[1 1 0 0 0 1]);
+    corke.iii.theta_rad = robot.ikine(examples.iii.T_03,[90 90 -270]*pi/180,'mask',[1 -1 0 0 0 1]);
+    corke.iv.theta_rad = robot.ikine(examples.iv.T_03,[0 0 0],'mask',[1 1 0 0 0 1]);
+    % The example iv does NOT converge, which matches our calculated result
+
+    disp('Results from Corke toolbox:');
+
+    for i = 1:length(nameList)
+        if ~isempty(corke.(char(nameList(i))).theta_rad)
+            corke.(char(nameList(i))).theta_deg = corke.(char(nameList(i))).theta_rad*180/pi;
+            disp(strcat("The Corke joint angles for example ",char(nameList(i)),':'));
+            disp(corke.(char(nameList(i))).theta_deg);
+        else
+            disp(strcat("No valid joint angles for example ",char(nameList(i))));
+        end
+    end
+##### SOURCE END #####
+--></body></html>

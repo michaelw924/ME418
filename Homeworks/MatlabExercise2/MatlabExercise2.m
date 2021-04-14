@@ -55,4 +55,4 @@ clear; clc; close all;
         examples.(char(nameList(i))).theta_deg = 180/pi*examples.(char(nameList(i))).theta_rad;
     end
     
-    %% Part C: Validating with 
+    %% Part C: Validating with Corke

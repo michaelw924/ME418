@@ -85,6 +85,9 @@ clear; clc; close all;
             /examples.(char(nameList(i))).T_3H;
     end
     
+<<<<<<< HEAD
+    %% Part C: Validating with Corke
+=======
 %% Part C: Validating with Corke
     % Generate robot from link parameters
     L(1) = Link([0 0 4 0],'mod');
@@ -110,3 +113,4 @@ clear; clc; close all;
             disp(strcat("No valid joint angles for example ",char(nameList(i))));
         end
     end
+>>>>>>> 1b6cfcdbe3b4e747da2166043d8335e02083662a

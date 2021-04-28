@@ -1,0 +1,232 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Homework 4, Problem 1</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-04-28"><meta name="DC.source" content="Homework4_1.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Homework 4, Problem 1</h1><p>Code by Michael White</p><pre class="codeinput">clear; clc; close <span class="string">all</span>;
+
+<span class="comment">% Setup initial parameters</span>
+theta1 = 5; <span class="comment">%degrees</span>
+theta2 = 15; <span class="comment">%degrees</span>
+theta3 = 40; <span class="comment">%degrees</span>
+td12 = 1; <span class="comment">%seconds</span>
+td23 = 1; <span class="comment">%seconds</span>
+theta_dd = 80; <span class="comment">%degrees/second^2</span>
+
+<span class="comment">% Calculate theta12_d and theta23_d</span>
+theta12_d = (theta2-theta1)/td12;
+theta23_d = (theta3-theta2)/td23;
+
+<span class="comment">% Calculate times 1,2,3</span>
+t1 = theta12_d/theta_dd;
+t2 = (theta23_d-theta12_d)/theta_dd;
+t3 = theta23_d/theta_dd;
+
+<span class="comment">% Display these values</span>
+disp(<span class="string">'Theta12_d ='</span>); disp(theta12_d);
+disp(<span class="string">'Theta23_d ='</span>); disp(theta23_d);
+disp(<span class="string">'t1 ='</span>); disp(t1);
+disp(<span class="string">'t2 ='</span>); disp(t2);
+disp(<span class="string">'t3 ='</span>); disp(t3);
+<span class="comment">% Generate functions for plots</span>
+syms <span class="string">t</span>;
+fx.acceleration = piecewise(<span class="keyword">...</span>
+    t &lt; t1, theta_dd,<span class="keyword">...</span>
+    t1 &lt; t &lt; (td12-0.5*t2), 0,<span class="keyword">...</span>
+    (td12-0.5*t2) &lt; t &lt; (td12+0.5*t2), theta_dd,<span class="keyword">...</span>
+    (td12+0.5*t2) &lt; t &lt; (td12+td23-0.5*t3), 0,<span class="keyword">...</span>
+    (td12+td23-0.5*t3) &lt; t &lt; (td12+td23), -theta_dd);
+fx.velocity = piecewise(<span class="keyword">...</span>
+    t &lt; t1, theta_dd*t,<span class="keyword">...</span>
+    t1 &lt; t &lt; (td12-0.5*t2), theta12_d,<span class="keyword">...</span>
+    (td12-0.5*t2) &lt; t &lt; (td12+0.5*t2), theta12_d+theta_dd*(t-(td12-0.5*t2)),<span class="keyword">...</span>
+    (td12+0.5*t2) &lt; t &lt; (td12+td23-t3), theta23_d,<span class="keyword">...</span>
+    (td12+td23-t3) &lt; t &lt; (td12+td23), theta23_d-theta_dd*(t-(td12+td23-t3)));
+fx.position = piecewise(<span class="keyword">...</span>
+    t &lt; t1, theta1+0.5*theta_dd*t^2,<span class="keyword">...</span>
+    t1 &lt; t &lt; (td12-0.5*t2), 5.6250+theta12_d*(t-t1),<span class="keyword">...</span>
+    (td12-0.5*t2) &lt; t &lt; (td12+0.5*t2), 13.4375+theta12_d*(t-(td12-0.5*t2))+0.5*theta_dd*(t-(td12-0.5*t2))^2,<span class="keyword">...</span>
+    (td12+0.5*t2) &lt; t &lt; (td12+td23-t3), 16.7188+theta23_d*(t-(td12+0.5*t2)),<span class="keyword">...</span>
+    (td12+td23-t3) &lt; t &lt; (td12+td23), 31.5626+theta23_d*(t-(td12+td23-t3))-0.5*theta_dd*(t-(td12+td23-t3))^2);
+
+<span class="comment">% Generate figures for position, velocity, and acceleration</span>
+figure; hold <span class="string">on</span>;
+set(gcf,<span class="string">'Position'</span>,[1 1 1020 575]); grid <span class="string">on</span>;
+<span class="comment">% Acceleration</span>
+subplot(3,1,1);
+fplot(fx.acceleration,<span class="string">'-r'</span>,<span class="string">'LineWidth'</span>,2); grid <span class="string">on</span>;
+xlim([0,td12+td23]);
+ylim([-theta_dd-10,theta_dd+10]);
+title(<span class="string">'Acceleration vs. Time'</span>);
+xlabel(<span class="string">'Time'</span>);
+ylabel(<span class="string">'Acceleration (deg/s^2)'</span>);
+<span class="comment">% Velocity</span>
+subplot(3,1,2);
+fplot(fx.velocity,<span class="string">'-b'</span>,<span class="string">'LineWidth'</span>,2); grid <span class="string">on</span>;
+xlim([0,td12+td23]);
+title(<span class="string">'Velocity vs. Time'</span>);
+xlabel(<span class="string">'Time'</span>);
+ylabel(<span class="string">'Velocity (deg/s)'</span>);
+<span class="comment">% Position</span>
+subplot(3,1,3);
+fplot(fx.position,<span class="string">'-k'</span>,<span class="string">'LineWidth'</span>,2); grid <span class="string">on</span>;
+xlim([0,td12+td23]);
+title(<span class="string">'Position vs. Time'</span>);
+xlabel(<span class="string">'Time'</span>);
+ylabel(<span class="string">'Position (deg)'</span>);
+</pre><pre class="codeoutput">Theta12_d =
+    10
+
+Theta23_d =
+    25
+
+t1 =
+    0.1250
+
+t2 =
+    0.1875
+
+t3 =
+    0.3125
+
+</pre><img vspace="5" hspace="5" src="Homework4_1_01.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Homework 4, Problem 1
+% Code by Michael White
+clear; clc; close all;
+
+% Setup initial parameters
+theta1 = 5; %degrees
+theta2 = 15; %degrees
+theta3 = 40; %degrees
+td12 = 1; %seconds
+td23 = 1; %seconds
+theta_dd = 80; %degrees/second^2
+
+% Calculate theta12_d and theta23_d
+theta12_d = (theta2-theta1)/td12;
+theta23_d = (theta3-theta2)/td23;
+
+% Calculate times 1,2,3
+t1 = theta12_d/theta_dd;
+t2 = (theta23_d-theta12_d)/theta_dd;
+t3 = theta23_d/theta_dd;
+
+% Display these values
+disp('Theta12_d ='); disp(theta12_d);
+disp('Theta23_d ='); disp(theta23_d);
+disp('t1 ='); disp(t1);
+disp('t2 ='); disp(t2);
+disp('t3 ='); disp(t3);
+% Generate functions for plots
+syms t;
+fx.acceleration = piecewise(...
+    t < t1, theta_dd,...
+    t1 < t < (td12-0.5*t2), 0,...
+    (td12-0.5*t2) < t < (td12+0.5*t2), theta_dd,...
+    (td12+0.5*t2) < t < (td12+td23-0.5*t3), 0,...
+    (td12+td23-0.5*t3) < t < (td12+td23), -theta_dd);
+fx.velocity = piecewise(...
+    t < t1, theta_dd*t,...
+    t1 < t < (td12-0.5*t2), theta12_d,...
+    (td12-0.5*t2) < t < (td12+0.5*t2), theta12_d+theta_dd*(t-(td12-0.5*t2)),...
+    (td12+0.5*t2) < t < (td12+td23-t3), theta23_d,...
+    (td12+td23-t3) < t < (td12+td23), theta23_d-theta_dd*(t-(td12+td23-t3)));
+fx.position = piecewise(...
+    t < t1, theta1+0.5*theta_dd*t^2,...
+    t1 < t < (td12-0.5*t2), 5.6250+theta12_d*(t-t1),...
+    (td12-0.5*t2) < t < (td12+0.5*t2), 13.4375+theta12_d*(t-(td12-0.5*t2))+0.5*theta_dd*(t-(td12-0.5*t2))^2,...
+    (td12+0.5*t2) < t < (td12+td23-t3), 16.7188+theta23_d*(t-(td12+0.5*t2)),...
+    (td12+td23-t3) < t < (td12+td23), 31.5626+theta23_d*(t-(td12+td23-t3))-0.5*theta_dd*(t-(td12+td23-t3))^2);
+
+% Generate figures for position, velocity, and acceleration
+figure; hold on; 
+set(gcf,'Position',[1 1 1020 575]); grid on;
+% Acceleration
+subplot(3,1,1);  
+fplot(fx.acceleration,'-r','LineWidth',2); grid on;
+xlim([0,td12+td23]);
+ylim([-theta_dd-10,theta_dd+10]);
+title('Acceleration vs. Time');
+xlabel('Time');
+ylabel('Acceleration (deg/s^2)');
+% Velocity
+subplot(3,1,2); 
+fplot(fx.velocity,'-b','LineWidth',2); grid on;
+xlim([0,td12+td23]);
+title('Velocity vs. Time');
+xlabel('Time');
+ylabel('Velocity (deg/s)');
+% Position
+subplot(3,1,3); 
+fplot(fx.position,'-k','LineWidth',2); grid on;
+xlim([0,td12+td23]);
+title('Position vs. Time');
+xlabel('Time');
+ylabel('Position (deg)');
+##### SOURCE END #####
+--></body></html>
